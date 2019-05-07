@@ -1,6 +1,6 @@
-# bitty_controller_firmware
+# bitty_controller_device_code
 
-Firmware examples and templates for various microcontrollers for use with the Bitty Controller apps
+Code examples and templates for various microcontrollers for use with the Bitty Controller apps
 
 Bitty Controller is an application for iOS, Android and web (see https://www.bittysoftware.com/bittyweb/) which allows you to remote control maker projects like smart cards, cranes... in fact anything which is connected to a microcontroller or computer which you can program and which supports Bluetooth Low Energy (LE). It has a series of different user interfaces, each one suited to particular types of control scenario. See https://www.bittysoftware.com/apps/bitty_controller.html for more information.
 
