@@ -43,6 +43,8 @@ int msg_lens[9] = {0, 2, 3, 3, 2, 3, 2, 2, 7};
 unsigned char sensor_msg[4] = {5, 0, 0, 0}; // Message length is 3. Buffer is zero delimited.
 int pos = 0;
 
+int sampling = 0;
+
 unsigned long sample_timestamp;
 
 SoftwareSerial mySerial(rxPin, txPin);
@@ -90,7 +92,7 @@ int readMessage(int readch, char *buffer)
   }
   else
   {
-    Serial.print("Error: unexpected excess data - bug! : ");
+    Serial.print("Error: unexpected excess data - bug? : ");
     Serial.println(rx_count);
     return rx_count;
   }
@@ -181,6 +183,16 @@ void otherControlEvent()
 void samplingControlEvent()
 {
   // format: [0x06, 0x00] - opcode, 1=start sampling, 2=stop sampling
+  if (buf[1] == 1) {
+    Serial.print("starting sampling");
+    sampling = 1;
+    return;
+  }
+  if (buf[1] == 2) {
+    Serial.print("stoping sampling");
+    sampling = 0;
+    return;
+  }
 }
 
 void padEvent()
@@ -259,15 +271,17 @@ void loop()
     expected = 0;
     opcode = 0;
   }
-  // sample sensors every 1000ms
-  if (millis() - sample_timestamp > 1000)
-  {
-    // simulate sampling from 5 different sensors
-    for (int i = 1; i < 6; i++)
+  if (sampling == 1) {
+    // sample sensors every 1000ms
+    if (millis() - sample_timestamp > 1000)
     {
-      transmitSensorReading(i, simulateSensorReading());
-      delay(50);
+      // simulate sampling from 5 different sensors
+      for (int i = 1; i < 6; i++)
+      {
+        transmitSensorReading(i, simulateSensorReading());
+        delay(50);
+      }
+      sample_timestamp = millis();
     }
-    sample_timestamp = millis();
   }
 }
