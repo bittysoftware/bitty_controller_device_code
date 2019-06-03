@@ -189,7 +189,7 @@ void samplingControlEvent()
     return;
   }
   if (buf[1] == 2) {
-    Serial.print("stoping sampling");
+    Serial.print("stopping sampling");
     sampling = 0;
     return;
   }
