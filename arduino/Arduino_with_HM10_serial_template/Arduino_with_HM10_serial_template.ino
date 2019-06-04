@@ -184,12 +184,12 @@ void samplingControlEvent()
 {
   // format: [0x06, 0x00] - opcode, 1=start sampling, 2=stop sampling
   if (buf[1] == 1) {
-    Serial.print("starting sampling");
+    Serial.println("starting sampling");
     sampling = 1;
     return;
   }
   if (buf[1] == 2) {
-    Serial.print("stopping sampling");
+    Serial.println("stopping sampling");
     sampling = 0;
     return;
   }
