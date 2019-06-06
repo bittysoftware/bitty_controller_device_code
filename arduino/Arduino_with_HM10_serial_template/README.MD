@@ -16,6 +16,7 @@ The message formats which may be received from Bitty Controller can be deduced f
 
 ## Opcode 1 - Dual Dpad Controller Events
 
+```
 format: [0x01, 0x00] - opcode, dpad event ID
 
 dpad event IDs:
@@ -35,47 +36,60 @@ dpad event IDs:
   14 - right pad, left button - released
   15 - right pad, right button - pressed
   16 - right pad, right button - released
+```
 
 ## Opcode 2 - Touchpad Motion Events
 
+```
 format: [0x02, 0x00, 0x00] - opcode, fwd / bwd magnitude (-10 to +10), left / right magnitude (-10 to +10)
 
 Note: consider the trackball to be centred at the origin with coordinates (0,0). Fwd / bwd and left / right displacements are measured from -10 to +10 with negative values if the trackball is to the left of centre (x-axis) or below the y-axis.
+```
 
 ## Opcode 3 - Touchpad Control Events
 
+```
 format: [0x03, 0x00, 0x00] - opcode, RFU, 1=touchpad touched, 0=touchpad released
 
 Examples:
         [0x03, 0x00, 0x01] - touchpad touched
         [0x03, 0x00, 0x00] - touchpad released
+```
 
 ## Opcode 4 - Miscellaneous Control Events
 
+```
 format: [0x04, 0x00] - opcode, enhanced touchpad button 1=pressed, 2=released
 
 Examples:
         [0x04, 0x01] - enhanced touchpad button pressed
         [0x04, 0x02] - enhanced touchpad button released
+```
 
 ## Opcode 6 - Sampling Control Events
 
+```
  format: [0x06, 0x00] - opcode, 1=start sampling, 2=stop sampling
+```
 
 ## Opcode 7 - Multipad Buttons
 
+```
 format: [0x07, 0x00] - opcode, pad/button ID pressed
 Examples:
         [0x07, 0x03] - button 3 on the touchpad with buttons UI was pressed
+```
 
 ## Opcode 8 - Switch Events
 
+```
 format: [0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00] - opcode, pin #1 number, pin #1 state, pin #2 number, pin #2 state, pin #3 number, pin #3 state
 
 Examples:
         [0x08, 0x0B, 0x01, 0x0C, 0x00, 0x0D, 0x01] - pin 11 on, pin 12 off, pin 13 on
         [0x08, 0x0B, 0x00, 0x0C, 0x00, 0x0D, 0x00] - pin 11 off, pin 12 off, pin 13 off
         [0x08, 0x0B, 0x01, 0x0C, 0x01, 0x0D, 0x01] - pin 11 on, pin 12 on, pin 13 on
+```
 
 ## Sending data to Bitty Controller for the enhanced touchpad sensor value cells
 
