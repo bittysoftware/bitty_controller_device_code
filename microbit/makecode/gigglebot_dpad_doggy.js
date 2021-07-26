@@ -72,6 +72,8 @@ function wagTail() {
 control.onEvent(EventBusSource.MES_DPAD_CONTROLLER_ID, EventBusValue.MICROBIT_EVT_ANY, function () {
     switch (control.eventValue()) {
         case EventBusValue.MES_DPAD_BUTTON_4_DOWN:        
+            shakeHead()
+            return
         case EventBusValue.MES_DPAD_BUTTON_3_DOWN:
             wagTail()
             return
